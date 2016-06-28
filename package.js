@@ -8,7 +8,7 @@ Package.registerBuildPlugin({
   name: 'htmlToString',
   use: ['ecmascript'],
   sources: [
-    'plugin/html-to-string.js',
+    './html-to-string.js',
   ],
 });
 

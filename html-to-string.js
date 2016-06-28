@@ -7,7 +7,11 @@ Plugin.registerCompiler({
 export class HtmlToStringCompiler {
   processFilesForTarget (files) {
     files.forEach(function (file) {
-      let output = `module.exports = ${file.getContentsAsString()}`;
+      /**
+       * FIXME: This parser is modifying the structure of the original file, it shouldn't
+       */
+      const modifiedString = file.getContentsAsString().replace(/\n/g, '');
+      let output = `module.exports = '${modifiedString}';`;
       file.addJavaScript({ data: output, path: file.getPathInPackage() + '.js' });
     });
   }
