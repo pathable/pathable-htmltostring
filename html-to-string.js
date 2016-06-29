@@ -12,6 +12,7 @@ export class HtmlToStringCompiler {
        */
       let modifiedString = '';
       file.getContentsAsString()
+        .replace(/\'/g, '\\\'')
         .split('\n')
         .forEach((line) => {
           modifiedString += `'${line}' + `;
@@ -19,8 +20,6 @@ export class HtmlToStringCompiler {
       modifiedString += `''`;
 
       let output = `module.exports = ${modifiedString};`;
-
-      console.log(output);
 
       file.addJavaScript({ data: output, path: file.getPathInPackage() + '.js' });
     });
