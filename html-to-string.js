@@ -10,8 +10,18 @@ export class HtmlToStringCompiler {
       /**
        * FIXME: This parser is modifying the structure of the original file, it shouldn't
        */
-      const modifiedString = file.getContentsAsString().replace(/\n/g, '');
-      let output = `module.exports = '${modifiedString}';`;
+      let modifiedString = '';
+      file.getContentsAsString()
+        .split('\n')
+        .forEach((line) => {
+          modifiedString += `'${line}' + `;
+        });
+      modifiedString += `''`;
+
+      let output = `module.exports = ${modifiedString};`;
+
+      console.log(output);
+
       file.addJavaScript({ data: output, path: file.getPathInPackage() + '.js' });
     });
   }
