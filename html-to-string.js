@@ -1,7 +1,7 @@
 function HtmlToString () {}
 
 Plugin.registerCompiler({
-  extensions: ['html'],
+  extensions: ['html', 'xml'],
 }, () => new HtmlToStringCompiler());
 
 export class HtmlToStringCompiler {
